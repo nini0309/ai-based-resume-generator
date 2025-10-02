@@ -1,2 +1,3 @@
-frontend/node_modules/
-backend/.env 
+resume_frontend/node_modules/
+resume_backend/.env 
+resume_backend/__pycache__/
