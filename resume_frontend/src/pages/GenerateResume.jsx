@@ -3,8 +3,10 @@ import toast from "react-hot-toast";
 import { FaBrain, FaTrash, FaPaperPlane } from "react-icons/fa";
 import { generateResume } from "../api/ResumeService";
 import Resume from "../components/Resume";
+import EditResume from "../components/EditResume";
 
 const GenerateResume = () => {
+  const [showEditUI, setShowEditUI] = useState(false);
   const [showResumeUI, setShowResumeUI] = useState(false);
   const [showPromptInput, setShowPromptInput] = useState(true);
 
@@ -94,6 +96,16 @@ const GenerateResume = () => {
           >
             Generate Another
           </div>
+          <div
+            onClick={() => {
+              setShowPromptInput(false);
+              setShowEditUI(true);
+              setShowResumeUI(false);
+            }}
+            className="btn btn-success"
+          >
+            Edit
+          </div>
         </div>
       </div>
     );
@@ -101,6 +113,16 @@ const GenerateResume = () => {
 
   return (
     <div className="mt-5 p-10 flex flex-col gap-3 items-center justify-center font-sans">
+      {showEditUI && (
+        <EditResume
+          resumeData={JSON.parse(resume)}
+          setResume={setResume}
+          onCancel={() => {
+            setShowEditUI(false);
+            setShowResumeUI(true);
+          }}
+        />
+      )}
       {showPromptInput && ShowInputField()}
       {showResumeUI && showResume()}
     </div>
