@@ -9,8 +9,11 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import GenerateResume from "./pages/GenerateResume";
 import { Toaster } from "react-hot-toast";
+import { loadConfig } from "./api/config";
 
-createRoot(document.getElementById("root")).render(
+async function init() {
+  await loadConfig();
+  createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Toaster />
@@ -26,3 +29,6 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </StrictMode>
 );
+}
+
+init();
